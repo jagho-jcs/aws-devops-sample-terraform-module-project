@@ -95,9 +95,7 @@ resource "aws_subnet" "public" {
   vpc_id                     = aws_vpc.this[0].id
  
   cidr_block                 = var.public_subnets[count.index]
-  # cidr_block                 = "10.10.${count.index+1}.0/24"
 
-  # availability_zone          = element(var.azs, count.index)
   availability_zone          = "${element(data.aws_availability_zones.all.names, count.index)}"
 
   map_public_ip_on_launch    = true
@@ -123,8 +121,6 @@ resource "aws_subnet" "private" {
  
   cidr_block                 = var.private_subnets[count.index]
   
-  # availability_zone          = element(var.azs, count.index)
-
   availability_zone          = "${element(data.aws_availability_zones.all.names, count.index)}"
 
   map_public_ip_on_launch    = false
