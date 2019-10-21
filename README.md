@@ -1,5 +1,5 @@
-# AWS DevOps Sample Terraform Module
+# AWS DevOps Example Terraform Module
 
 This has been tested using Terraform v0.12.x.
 
-The solution intends to demonstrate best practice resilience within a multiple regions.
+This solution intends to demonstrate best practice resilience within multiple aws regions.
