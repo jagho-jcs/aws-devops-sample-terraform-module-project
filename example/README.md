@@ -24,5 +24,5 @@ $ terraform apply
 |vpc_cidr_block | The CIDR block of the VPC |
 | private_subnets| List of IDs of private subnets |
 | private_subnets_cidr_blocks | List of cidr_blocks of private subnets |
-| public_subnets | List of IDs of private subnets |
+| public_subnets | List of IDs of public subnets |
 | public_subnets_cidr_blocks | List of cidr_blocks of public subnets |
