@@ -1,6 +1,9 @@
 data "aws_availability_zones" "all" {}
 
-# Define a vpc
+###################
+# VPC
+###################
+
 resource "aws_vpc" "this" {
   count = var.create_vpc ? 1 : 0
 
