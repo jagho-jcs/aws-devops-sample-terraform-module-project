@@ -173,6 +173,6 @@ variable "default_vpc_tags" {
   type        = map(string)
   default     = {
 
-    ProvisionedBy = "Yomi Ogunyinka"
+    ProvisionedBy = "Amazon Web Services"
   }
 }
