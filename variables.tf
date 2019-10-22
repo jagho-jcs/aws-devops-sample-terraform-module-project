@@ -69,17 +69,19 @@ variable "enable_classiclink_dns_support" {
 #
 ###########################################################################
 
-variable "vpc_tg" {
+variable "environment_tag" {
   type = "string"
   description = "describe your variable"
-
-  default     = "my-test-vpc"
 }
 
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
-  default     = {}
+  default     = {
+
+                  ProvisionedBy = "Terraform"
+                
+                }
 }
 
 variable "vpc_tags" {
@@ -88,8 +90,26 @@ variable "vpc_tags" {
   default     = {}
 }
 
+# variable "igw_tags" {
+#   description = "Additional tags for the internet gateway"
+#   type        = map(string)
+#   default     = {}
+# }
+
 variable "igw_tags" {
   description = "Additional tags for the internet gateway"
+  type        = string
+  default     = "igw"
+}
+
+variable "public_acl_tags" {
+  description = "Additional tags for the public subnets network ACL"
+  type        = string
+  default     = "ACLS Public"
+}
+
+variable "private_acl_tags" {
+  description = "Additional tags for the private subnets network ACL"
   type        = map(string)
   default     = {}
 }
