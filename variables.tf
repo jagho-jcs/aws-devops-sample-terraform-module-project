@@ -96,46 +96,46 @@ variable "vpc_tags" {
 #   default     = {}
 # }
 
-variable "igw_tags" {
-  description = "Additional tags for the internet gateway"
+variable "igw_tag" {
+  description = "tag for the internet gateway"
   type        = string
   default     = "igw"
 }
 
-variable "public_acl_tags" {
-  description = "Additional tags for the public subnets network ACL"
+variable "public_acl_tag" {
+  description = "tag for the public subnets network ACL"
   type        = string
   default     = "ACLS Public"
 }
 
-variable "private_acl_tags" {
-  description = "Additional tags for the private subnets network ACL"
-  type        = map(string)
-  default     = {}
+variable "private_acl_tag" {
+  description = "tag for the private subnets network ACL"
+  type        = string
+  default     = "ACLS Private"
 }
 
-variable "public_subnet_tags" {
-  description = "Additional tags for the public subnets"
-  type        = map(string)
-  default     = {}
+variable "public_subnet_tag" {
+  description = "tag for the public subnets"
+  type        = string
+  default     = "Public Subnet"
 }
 
-variable "private_subnet_tags" {
-  description = "Additional tags for the private subnets"
-  type        = map(string)
-  default     = {}
+variable "private_subnet_tag" {
+  description = "tag for the private subnets"
+  type        = string
+  default     = "Private Subnet"
 }
 
-variable "public_route_table_tags" {
-  description = "Additional tags for the public route tables"
-  type        = map(string)
-  default     = {}
+variable "public_route_table_tag" {
+  description = "tag for the public route tables"
+  type        = string
+  default     = "Public Route Table"
 }
 
-variable "private_route_table_tags" {
-  description = "Additional tags for the private route tables"
-  type        = map(string)
-  default     = {}
+variable "private_route_table_tag" {
+  description = "tag for the private route tables"
+  type        = string
+  default     = "Private Route Table"
 }
 
 variable "demo_env_default_tags" {
@@ -151,7 +151,38 @@ variable "demo_env_default_tags" {
     CostCentre     = "Operations"
   }
 }
+variable "security_groups_tags" {
+  type        = map(string)
+  description = "Default tags to be applied to all resources created in the demo environment"
+  default = {
+    Application  = "NGINX-Spring-Boot-App"
+  }
+}
 
+variable "key_name" {
+  type              = "string"
+  description       = "describe your variable"
+  default           = "hsbc_demo_web_cluster"
+}
+
+variable "public_key_path" {
+  type = "string"
+  description = "describe your variable"
+
+  default           = "~/.ssh/hsbc_demo.pub"
+}
+
+variable "private_key_path" {
+  type = "string"
+  description = "describe your variable"
+  default           = "~/.ssh/hsbc_demo"
+}
+
+variable "instance_type" {
+  type = "string"
+  description       = "describe your variable"
+  default           = "t2.micro"
+}
 ###########################################################################
 #
 #   Default VPC Configuration - 
@@ -196,3 +227,4 @@ variable "default_vpc_tags" {
     ProvisionedBy = "Amazon Web Services"
   }
 }
+
