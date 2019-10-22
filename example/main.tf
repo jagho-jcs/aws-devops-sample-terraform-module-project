@@ -18,13 +18,8 @@ module "vpc" {
 
   private_subnets            = var.private_subnets
 
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
-  }
+  vpc_tags                   = var.vpc_tags
 
-  vpc_tags = {
-    Name = "vpc-name"
-  }
+  environment_tag            = var.environment_tag
 
 }
