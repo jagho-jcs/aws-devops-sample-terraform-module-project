@@ -32,8 +32,6 @@ resource "aws_vpc" "this" {
 
     Name = var.name
 
-    # "Name" = format("%", var.name)
-
     },
     var.tags,    # Will be applied to all resources
     var.vpc_tags,
@@ -53,7 +51,6 @@ resource "aws_internet_gateway" "default" {
     "Name:" = "${var.igw_tag}_${var.name}"
   },
   var.tags,    # Will be applied to all resources
-    # var.igw_tags,
   )
 }
 
@@ -101,8 +98,10 @@ resource "aws_route_table" "private_rtb" {
 
 
   lifecycle {
+
     # When attaching VPN gateways it is common to define aws_vpn_gateway_route_propagation
     # resources that manipulate the attributes of the routing table (typically for the private subnets)
+
             ignore_changes   = [propagating_vgws]
   }
   tags = merge(
@@ -185,6 +184,7 @@ resource "aws_network_acl" "acls_pub_prod" {
 /* This needs to be changeed to a resource type to allow for 
     future ports to be added and tested in different 
     environment!...*/
+
   ingress {    /* Rule # 100*/
     protocol   = -1
     rule_no    = 100
@@ -208,6 +208,7 @@ resource "aws_network_acl" "acls_pub_prod" {
 
     Name            = "${var.public_acl_tag} ${var.environment_tag}"
     Environment     = var.environment_tag
+
   },
   var.tags,    # Will be applied to all resources
   )
@@ -226,6 +227,7 @@ resource "aws_network_acl" "acls_private_prod" {
 /* This needs to be changed to a resource type to allow for 
     future ports to be added and tested in different 
     environment!...*/
+
   ingress {    /* Rule # 100*/
     protocol   = -1
     rule_no    = 100
@@ -294,9 +296,7 @@ resource "aws_default_vpc" "this" {
 
     Name = "do not use!.."
 
-    # "Name" = format("%", var.name)
-
-    },
+  },
     var.tags,    # Will be applied to all resources
     var.default_vpc_tags,
     )
@@ -350,10 +350,8 @@ resource "aws_security_group" "web-instance-sg" {
   tags = merge(
   {
 
-          Name      = "web-instance-sg"
-          VPC       = var.name
-
-    # "Name" = format("%", var.name)
+    Name      = "web-instance-sg"
+    VPC       = var.name
 
   },
     var.tags,    # Will be applied to all resources
@@ -393,10 +391,8 @@ resource "aws_security_group" "alb_hsbc_sg" {
   tags = merge(
   {
 
-          Name      = "hsbc_nginx_sg_alb"
-          VPC       = var.name
-
-    # "Name" = format("%", var.name)
+    Name      = "hsbc_nginx_sg_alb"
+    VPC       = var.name
 
   },
     var.tags,    # Will be applied to all resources
@@ -412,19 +408,23 @@ resource "aws_key_pair" "auth-key" {
 }
 
 resource "aws_instance" "web-instance" {
+
   # The connection block tells our provisioner how to
   # communicate with the resource (instance)
+  
   connection {
+  
     # The default username for our AMI
+  
     type                  = "ssh"
     user                  = "ubuntu"
     host                  = "${self.public_ip}"
     private_key           = file(var.private_key_path)
+  
     # The connection will use the local SSH agent for authentication.
+  
   }
   
-  # count                   = length(data.aws_subnet_ids.hsbc-subnets.ids)
-
   count                   = "${length(data.aws_availability_zones.all.names)}"
 
   instance_type           = "${var.instance_type}"
@@ -483,7 +483,94 @@ resource "aws_instance" "web-instance" {
       "sudo ufw --force enable"
     ]
   }
+
+  tags = merge(
+  {
+
+    Name = var.web_cluster_tag
+
+  },
+    var.tags,    # Will be applied to all resources
+    var.demo_env_default_tags,
+    )
 }
 
+resource "aws_launch_configuration" "as_conf_web_instance" {
+  
+  name_prefix                       = "nginx-lc-"
+  image_id                          = "${data.aws_ami.ubuntu.id}"
+  instance_type                     = "${var.instance_type}"
+    
+  lifecycle {
 
+    create_before_destroy           = true
+  }
+  
+}
 
+resource "aws_autoscaling_group" "wb_instance_asg" {
+
+  name                              = "Nginx Web Instance ASG"
+  
+  launch_configuration              = "${aws_launch_configuration.as_conf_web_instance.name}"
+  
+  vpc_zone_identifier               = flatten(["${aws_subnet.public.*.id}"])
+
+  desired_capacity                  = var.desired_capacity
+  min_size                          = var.min_size
+  max_size                          = var.max_size
+
+  lifecycle {
+
+    create_before_destroy           = true
+  }
+}
+
+resource "aws_alb" "hsbc_alb" {
+
+  name               = "HSBC-Nginx-ALB"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [ aws_security_group.alb_hsbc_sg.id, aws_security_group.web-instance-sg.id ]
+  
+  subnets            = aws_subnet.public.*.id
+  
+  tags = {
+    Environment = "hsbc-demo-alb"
+  }
+}
+
+resource "aws_alb_target_group_attachment" "hsbc_nginx_grp_att" {
+
+  count             = length(aws_subnet.public.*.id)
+  target_group_arn  = aws_alb_target_group.hsbc_nginx_tgrp.arn
+  target_id         = element(aws_instance.web-instance.*.id, count.index)
+  port              = var.aws_alb_tgt_grp_att_port
+
+}
+
+resource "aws_alb_target_group" "hsbc_nginx_tgrp" {
+  
+  name              = "HSBC-NginxTargetGroup"
+  port              = var.aws_alb_target_group_port
+  protocol          = "HTTP"
+  vpc_id            = "${aws_vpc.this[0].id}"
+}
+
+resource "aws_autoscaling_attachment" "asg_att_hsbc_nginx" {
+  
+  autoscaling_group_name = "${aws_autoscaling_group.wb_instance_asg.id}"
+  alb_target_group_arn   = "${aws_alb_target_group.hsbc_nginx_tgrp.arn}"
+}
+
+resource "aws_alb_listener" "front_end" {
+  
+  load_balancer_arn = "${aws_alb.hsbc_alb.arn}"
+  port              = var.aws_alb_listener_port
+  protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = "${aws_alb_target_group.hsbc_nginx_tgrp.arn}"
+    type = "forward"
+  }
+}
