@@ -11,10 +11,17 @@ resource "aws_vpc" "this" {
   enable_dns_support         = var.enable_dns_support
   enable_dns_hostnames       = var.enable_dns_hostnames
 
-  tags = "${merge(var.demo_env_default_tags, map(
-    "Name", "${var.name}",
-    "Client", "JCS"
-    ))}"
+  tags = merge(
+  {
+
+    Name = var.name
+
+    # "Name" = format("%", var.name)
+
+    },
+    var.tags,    # Will be applied to all resources
+    var.vpc_tags,
+    )
 }
 
 ###################
@@ -23,12 +30,15 @@ resource "aws_vpc" "this" {
 
 resource "aws_internet_gateway" "default" {
   vpc_id                     = aws_vpc.this[0].id
-  
-  # tags = "${merge(var.demo_env_default_tags, map(
-  #   "Name", "${var.igw_tg}",
-  #   "Environment", "${var.vpc_tg}",
-  #   "Client", "JCS"
-  #   ))}"
+
+  tags = merge(
+  {
+
+    "Name:" = "${var.igw_tags}_${var.name}"
+  },
+  var.tags,    # Will be applied to all resources
+    # var.igw_tags,
+  )
 }
 
 ################
@@ -164,11 +174,14 @@ resource "aws_network_acl" "acls_pub_prod" {
     to_port    = 0
   }
 
-  # tags = "${merge(var.demo_env_default_tags, map(
-  #   "Name", "${var.acls_public_prod_tg} - ${var.vpc_tg}",
-  #   "Environment", "${var.vpc_tg}",
-  #   "Client", "JCS"
-  #   ))}"
+  tags = merge(
+  {
+
+    Name            = "${var.public_acl_tags} ${var.environment_tag}"
+    Environment     = var.environment_tag
+  },
+  var.tags,    # Will be applied to all resources
+  )
 }
 
 #######################
