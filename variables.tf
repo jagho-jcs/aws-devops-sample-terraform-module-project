@@ -159,30 +159,74 @@ variable "security_groups_tags" {
   }
 }
 
+variable "web_cluster_tag" {
+  type = "string"
+  description = "describe your variable"
+}
+
+
 variable "key_name" {
   type              = "string"
   description       = "describe your variable"
-  default           = "hsbc_demo_web_cluster"
 }
 
 variable "public_key_path" {
   type = "string"
   description = "describe your variable"
-
-  default           = "~/.ssh/hsbc_demo.pub"
 }
 
 variable "private_key_path" {
   type = "string"
   description = "describe your variable"
-  default           = "~/.ssh/hsbc_demo"
 }
 
 variable "instance_type" {
   type = "string"
   description       = "describe your variable"
-  default           = "t2.micro"
 }
+
+variable "desired_capacity" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 3
+}
+
+variable "min_size" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 2
+}
+
+variable "max_size" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 6
+}
+
+variable "aws_alb_tgt_grp_att_port" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 8080
+}
+
+variable "aws_alb_target_group_port" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 8080
+}
+
+variable "aws_alb_listener_port" {
+  type = "string"
+  description = "describe your variable"
+
+  # default           = 80
+}
+
 ###########################################################################
 #
 #   Default VPC Configuration - 
