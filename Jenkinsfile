@@ -19,9 +19,15 @@ pipeline {
         defaultValue: '',
         description: 'Availability Zones' )
 
-        string(name: 'public_subnets', 
+        // string(name: 'public_subnets', 
+        // defaultValue: '',
+        // description: 'A list of public subnets inside the VPC' )       
+
+        text(name: 'public_subnets', 
         defaultValue: '',
-        description: 'A list of public subnets inside the VPC' )       
+        description: 'A list of public subnets inside the VPC' ) 
+
+
 
         string(name: 'private_subnets', 
         defaultValue: '',
