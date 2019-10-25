@@ -13,7 +13,7 @@ crash.log
 # version control.
 #
 # example.tfvars
-*.tfvars
+*_virginia.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
@@ -32,4 +32,3 @@ override.tf.json
 backend.tf
 *.old
 provider.tf
-*_virginia
