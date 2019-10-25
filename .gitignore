@@ -32,3 +32,4 @@ override.tf.json
 backend.tf
 *.old
 provider.tf
+*_virginia
