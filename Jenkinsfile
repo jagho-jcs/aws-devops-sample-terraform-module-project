@@ -138,7 +138,7 @@ pipeline {
                 
                 {
                     
-                    sh "./init"
+                    sh "terraform init"
                     sh "terraform get"
                     sh 'terraform plan \
                         -var="region=${aws_region}" \
