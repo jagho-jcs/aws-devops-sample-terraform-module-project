@@ -1,15 +1,15 @@
 pipeline {
 
     agent any
-    // parameters {
+    parameters {
         
         // booleanParam(name: 'create_vpc', 
         //     defaultValue: true,
         //     description: 'Controls if VPC should be created (it affects almost all resources)')
         
-        // string(name: 'aws_region', 
-        //     defaultValue: 'eu-west-1',
-        //     description: 'Where would you like to deploy your VPC?.. Examples eu-west-1, eu-west-2')
+        string(name: 'aws_region', 
+            defaultValue: 'eu-west-1',
+            description: 'Where would you like to deploy your VPC?.. Examples eu-west-1, eu-west-2')
     
         // string(name: 'cidr', 
         //     defaultValue: '32.128.0.0/16',
@@ -85,7 +85,7 @@ pipeline {
         // string(name: 'aws_alb_listener_port', 
         //     defaultValue: '80',
         //     description: 'Application Load Balancer Listener Port')
-    // }
+    }
     environment {
 
         AWS_DEFAULT_REGION = "${params.aws_region}"
