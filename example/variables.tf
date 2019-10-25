@@ -4,9 +4,9 @@
 #
 #######################################
 
-variable "region" {}
-variable "shared_credentials_file" {}
-variable "profile" {}
+# variable "region" {}
+# variable "shared_credentials_file" {}
+# variable "profile" {}
 
 #######################################
 
