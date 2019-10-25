@@ -19,63 +19,62 @@ pipeline {
         defaultValue: '',
         description: 'Availability Zones' )
 
-        // string(name: 'public_subnets', 
+       
+
+        // text(name: 'public_subnets', 
         // defaultValue: '',
-        // description: 'A list of public subnets inside the VPC' )       
-
-        text(name: 'public_subnets', 
+        // description: 'A list of public subnets inside the VPC' ) 
+        string(name: 'public_subnets', 
         defaultValue: '',
-        description: 'A list of public subnets inside the VPC' ) 
-
-
+        description: 'A list of public subnets inside the VPC')
 
         string(name: 'private_subnets', 
         defaultValue: '',
-        description: 'A list of private subnets inside the VPC' )
+        description: 'A list of private subnets inside the VPC')
 
         string(name: 'environment_tag', 
         defaultValue: '',
-        description: 'Name of the Environment' )
+        description: 'Name of the Environment')
 
         string(name: 'vpc_tags', 
         defaultValue: '',
-        description: 'Additional tags for the VPC' )
+        description: 'Additional tags for the VPC')
 
         string(name: 'web_cluster_tag', 
         defaultValue: '',
-        description: 'New Cluster name' )
+        description: 'New Cluster name')
 
         string(name: 'key_name', 
         defaultValue: '',
-        description: 'Name of the Key Pair' )
+        description: 'Name of the Key Pair')
 
         string(name: 'instance_type', 
         defaultValue: '',
-        description: 'Specify AMI Type' ) 
+        description: 'Specify AMI Type') 
 
         string(name: 'desired_capacity', 
         defaultValue: '',
-        description: 'Specify the number of instances to run in this Auto Scaling group' )
+        description: 'Specify the number of instances to run in this Auto Scaling group')
 
         string(name: 'min_size', 
         defaultValue: '',
-        description: 'The minimum number of instances the Auto Scaling group should have at any time' ) 
+        description: 'The minimum number of instances the Auto Scaling group should have at any time') 
 
         string(name: 'max_size', 
         defaultValue: '',
-        description: 'The maximum number of instances the Auto Scaling group should have at any time' )
+        description: 'The maximum number of instances the Auto Scaling group should have at any time')
 
         string(name: 'aws_alb_tgt_grp_att_port', 
         defaultValue: '8080',
-        description: 'attachment port' )
+        description: 'attachment port')
 
         string(name: 'aws_alb_target_group_port', 
         defaultValue: '8080',
-        description: 'Target group port' )        
+        description: 'Target group port')        
 
         string(name: 'aws_alb_listener_port', 
         defaultValue: '80',
-        description: 'Application Load Balancer Listener Port' )
+        description: 'Application Load Balancer Listener Port')
     }
     environment {
 
