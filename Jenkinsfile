@@ -58,7 +58,7 @@ pipeline {
 
                     sh "terraform init"
                     sh "terraform get"
-                    sh 'terraform plan -var="region=${aws_region}" \
+                    sh 'terraform apply -var="region=${aws_region}" \
                         -var-file=jcs_example_vpc_london.tfvars -auto-approve'
                 }
             }
