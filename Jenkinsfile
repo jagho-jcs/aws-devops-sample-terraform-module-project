@@ -141,9 +141,9 @@ pipeline {
             steps {
                 
                 dir ('example')
-                    sh "terraform fmt -list=true -write=false -diff=true -check=true"
+                    // sh "terraform fmt -list=true -write=false -diff=true -check=true"
                 {
-                    
+                    sh "terraform fmt -list=true -write=false -diff=true -check=true"
                     sh "terraform init"
                     sh "terraform get"
                     sh "terraform apply -var-file=jcs_example_vpc_london.tfvars"
