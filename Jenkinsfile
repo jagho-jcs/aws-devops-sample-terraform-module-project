@@ -117,17 +117,17 @@ pipeline {
 
                 // Output Terraform Version 
 
-                sh 'terraform -version'
+                sh "terraform -version"
 
                 // Remove the terraform state file so we always start from a clean state
                 
-                if (fileExists(".terraform/terraform.tfstate")) {
-                    sh "rm -rf .terraform/terraform.tfstate"
-                }
+                // if (fileExists(".terraform/terraform.tfstate")) {
+                //     sh "rm -rf .terraform/terraform.tfstate"
+                // }
             
-                if (fileExists("status")) {
-                    sh "rm status"
-                }
+                // if (fileExists("status")) {
+                //     sh "rm status"
+                // }
             }
         }
         stage ('Provision VPC') {
