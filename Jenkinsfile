@@ -2,11 +2,10 @@ pipeline {
 
     agent any
     parameters {
-        
-        string(name: 'aws_region', 
-            defaultValue: 'eu-west-1',
+                
+        choice(name: 'aws_region', 
+            choices: ['eu-west-1', 'eu-west-2', 'us-east-1'], 
             description: 'Where would you like to deploy your VPC?.. Examples eu-west-1, eu-west-2')
-    
     }
     environment {
 
