@@ -53,7 +53,7 @@ pipeline {
         description: 'Name of the Key Pair')
 
         string(name: 'instance_type', 
-        defaultValue: 't2.micr',
+        defaultValue: 't2.micro',
         description: 'Specify AMI Type') 
 
         string(name: 'desired_capacity', 
