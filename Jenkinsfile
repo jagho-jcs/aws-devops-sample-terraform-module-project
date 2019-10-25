@@ -80,14 +80,14 @@ pipeline {
                 {
                     
                     sh "terraform init"
-                    sh 'terraform plan \
-                        -var="create_vpc=${create_vpc}" \
-                        -var="region=${aws_region}" \
-                        -var="aws_alb_tgt_grp_att_port=${aws_alb_tgt_grp_att_port}" \
-                        -var="aws_alb_target_group_port=${aws_alb_target_group_port}" \
-                        -var="aws_alb_listener_port=${aws_alb_listener_port}" \
-                        -var="cidr=${cidr}" \
-                        -var="azs=${azs}"'
+                    // sh 'terraform plan \
+                    //     -var="create_vpc=${create_vpc}" \
+                    //     -var="region=${aws_region}" \
+                    //     -var="aws_alb_tgt_grp_att_port=${aws_alb_tgt_grp_att_port}" \
+                    //     -var="aws_alb_target_group_port=${aws_alb_target_group_port}" \
+                    //     -var="aws_alb_listener_port=${aws_alb_listener_port}" \
+                    //     -var="cidr=${cidr}" \
+                    //     -var="azs=${azs}"'
                 }
             }
         }
