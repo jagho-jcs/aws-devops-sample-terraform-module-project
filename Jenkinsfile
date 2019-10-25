@@ -147,7 +147,7 @@ pipeline {
                     sh "terraform init"
                     sh "terraform get"
                     sh 'terraform plan -var="region=${aws_region}" \
-                        -var-file=jcs_example_vpc_london.tfvars"'
+                        -var-file=jcs_example_vpc_london.tfvars'
                     // sh 'terraform plan \
                     //     -var="region=${aws_region}" \
                     //     -var="cidr=${cidr}" \
