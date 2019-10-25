@@ -15,22 +15,26 @@ pipeline {
         defaultValue: '0.0.0.0/0',
         description: 'The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden' )
 
-        string(name: 'azs', 
+        
+        text(name: 'azs', 
         defaultValue: '',
-        description: 'Availability Zones' )
+        description: 'Availability Zones')
 
-       
-
-        // text(name: 'public_subnets', 
-        // defaultValue: '',
-        // description: 'A list of public subnets inside the VPC' ) 
-        string(name: 'public_subnets', 
+        text(name: 'public_subnets', 
         defaultValue: '',
         description: 'A list of public subnets inside the VPC')
 
-        string(name: 'private_subnets', 
+        text(name: 'private_subnets', 
         defaultValue: '',
         description: 'A list of private subnets inside the VPC')
+
+        // string(name: 'public_subnets', 
+        // defaultValue: '',
+        // description: 'A list of public subnets inside the VPC')
+
+        // string(name: 'private_subnets', 
+        // defaultValue: '',
+        // description: 'A list of private subnets inside the VPC')
 
         string(name: 'environment_tag', 
         defaultValue: '',
