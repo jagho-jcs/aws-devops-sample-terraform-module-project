@@ -17,11 +17,11 @@ pipeline {
 
         
         choice(name: 'azs', 
-            choices: ["'eu-west-2a' 'eu-west-2b' 'eu-west-2c'"],
+            choices: ["eu-west-2a eu-west-2b eu-west-2c"],
             description: 'Availability Zones')
 
         choice(name: 'public_subnets', 
-            choices: ["'32.128.112.0/20' '32.128.128.0/20' '32.128.144.0/20'"], 
+            choices: ["32.128.112.0/20 32.128.128.0/20 32.128.144.0/20"], 
             description: 'A list of public subnets inside the VPC')
 
 
@@ -31,7 +31,7 @@ pipeline {
         // description: 'A list of public subnets inside the VPC')
 
         choice(name: 'private_subnets', 
-            choices: ['32.128.16.0/20', '32.128.32.0/20', '32.128.48.0/20'],
+            choices: ["32.128.16.0/20' 32.128.32.0/20 32.128.48.0/20"],
             description: 'A list of private subnets inside the VPC')
 
         // string(name: 'public_subnets', 
