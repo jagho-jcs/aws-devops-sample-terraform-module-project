@@ -115,7 +115,19 @@ pipeline {
 
             steps {
 
+                // Output Terraform Version 
+
                 sh 'terraform -version'
+
+                // Remove the terraform state file so we always start from a clean state
+                
+                if (fileExists(".terraform/terraform.tfstate")) {
+                    sh "rm -rf .terraform/terraform.tfstate"
+                }
+            
+                if (fileExists("status")) {
+                    sh "rm status"
+                }
             }
         }
         stage ('Provision VPC') {
@@ -126,7 +138,8 @@ pipeline {
                 
                 {
                     
-                    sh "terraform init"
+                    sh "./init"
+                    sh "terraform get"
                     sh 'terraform plan \
                         -var="region=${aws_region}" \
                         -var="cidr=${cidr}" \
