@@ -4,11 +4,11 @@
 #
 #######################################
 
-region                       = "eu-west-2"
+# region                       = "eu-west-2"
 
-shared_credentials_file      = "/../../.aws/credentials"
+# shared_credentials_file      = "/../../.aws/credentials"
 
-profile                      = "dev-jcs"
+# profile                      = "dev-jcs"
 
 name                         = "jcs-demo-tfvars"
 
