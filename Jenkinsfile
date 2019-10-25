@@ -34,20 +34,19 @@ pipeline {
         description: 'Application Load Balancer Listener Port' )
     }
     environment {
-        
-        TF_HOME = tool('terraform-0.12.12')
-        TF_IN_AUTOMATION = "true"
-        PATH = "$TF_HOME:$PATH"
-        // JKS_AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
-        // JKS_AWS_SECRET_ACCESS = credentials('AWS_SECRET_ACCESS_KEY')
+
         AWS_DEFAULT_REGION = "${params.aws_region}"
         AWS_ACCESS_KEY_ID = "${JKS_AWS_ACCESS_KEY}"
         AWS_SECRET_ACCESS_KEY = "${JKS_AWS_SECRET_ACCESS}"
+        TF_HOME = tool('terraform-0.12.12')
+        TF_IN_AUTOMATION = "true"
+        PATH = "$TF_HOME:$PATH"
+
     }
 
     stages {
 
-        stage('my params') {
+        stage('params') {
 
             steps {
 
@@ -75,11 +74,6 @@ pipeline {
         stage ('Provision VPC') {
             
             steps {
-
-            // environment {
-
-            //     region = 
-            // }
                 
                 dir ('example')
                 
