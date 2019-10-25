@@ -20,12 +20,12 @@ pipeline {
         defaultValue: '"eu-west-2a", "eu-west-2b", "eu-west-2c"',
         description: 'Availability Zones')
 
-        string(name: 'public_subnets', 
-        defaultValue: '"32.128.112.0/20", "32.128.128.0/20", "32.128.144.0/20"',
+        choice(name: 'public_subnets', 
+        defaultValue: ['32.128.112.0/20', '32.128.128.0/20', '32.128.144.0/20'],
         description: 'A list of public subnets inside the VPC')
 
-        string(name: 'private_subnets', 
-        defaultValue: '"32.128.16.0/20", "32.128.32.0/20", "32.128.48.0/20"',
+        choice(name: 'private_subnets', 
+        defaultValue: ['32.128.16.0/20', '32.128.32.0/20', '32.128.48.0/20'],
         description: 'A list of private subnets inside the VPC')
 
         // string(name: 'public_subnets', 
