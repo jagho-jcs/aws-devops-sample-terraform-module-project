@@ -12,20 +12,20 @@ pipeline {
         description: 'Where would you like to deploy your VPC?.. Examples eu-west-1, eu-west-2' )
     
         string(name: 'cidr', 
-        defaultValue: '0.0.0.0/0',
+        defaultValue: '32.128.0.0/16',
         description: 'The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden' )
 
         
         text(name: 'azs', 
-        defaultValue: '',
+        defaultValue: '"eu-west-2a", "eu-west-2b", "eu-west-2c"',
         description: 'Availability Zones')
 
         text(name: 'public_subnets', 
-        defaultValue: '',
+        defaultValue: '"32.128.112.0/20", "32.128.128.0/20", "32.128.144.0/20"',
         description: 'A list of public subnets inside the VPC')
 
         text(name: 'private_subnets', 
-        defaultValue: '',
+        defaultValue: '"32.128.16.0/20", "32.128.32.0/20", "32.128.48.0/20"',
         description: 'A list of private subnets inside the VPC')
 
         // string(name: 'public_subnets', 
@@ -37,35 +37,35 @@ pipeline {
         // description: 'A list of private subnets inside the VPC')
 
         string(name: 'environment_tag', 
-        defaultValue: '',
+        defaultValue: 'Demo',
         description: 'Name of the Environment')
 
         string(name: 'vpc_tags', 
-        defaultValue: '',
+        defaultValue: 'my-test-vpc',
         description: 'Additional tags for the VPC')
 
         string(name: 'web_cluster_tag', 
-        defaultValue: '',
+        defaultValue: 'web_cluster',
         description: 'New Cluster name')
 
         string(name: 'key_name', 
-        defaultValue: '',
+        defaultValue: 'hsbc_demo_web_cluster',
         description: 'Name of the Key Pair')
 
         string(name: 'instance_type', 
-        defaultValue: '',
+        defaultValue: 't2.micr',
         description: 'Specify AMI Type') 
 
         string(name: 'desired_capacity', 
-        defaultValue: '',
+        defaultValue: '3',
         description: 'Specify the number of instances to run in this Auto Scaling group')
 
         string(name: 'min_size', 
-        defaultValue: '',
+        defaultValue: '1',
         description: 'The minimum number of instances the Auto Scaling group should have at any time') 
 
         string(name: 'max_size', 
-        defaultValue: '',
+        defaultValue: '6',
         description: 'The maximum number of instances the Auto Scaling group should have at any time')
 
         string(name: 'aws_alb_tgt_grp_att_port', 
