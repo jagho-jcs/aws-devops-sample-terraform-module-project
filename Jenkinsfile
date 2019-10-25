@@ -16,15 +16,15 @@ pipeline {
         description: 'The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden' )
 
         
-        text(name: 'azs', 
+        string(name: 'azs', 
         defaultValue: '"eu-west-2a", "eu-west-2b", "eu-west-2c"',
         description: 'Availability Zones')
 
-        text(name: 'public_subnets', 
+        string(name: 'public_subnets', 
         defaultValue: '"32.128.112.0/20", "32.128.128.0/20", "32.128.144.0/20"',
         description: 'A list of public subnets inside the VPC')
 
-        text(name: 'private_subnets', 
+        string(name: 'private_subnets', 
         defaultValue: '"32.128.16.0/20", "32.128.32.0/20", "32.128.48.0/20"',
         description: 'A list of private subnets inside the VPC')
 
