@@ -125,12 +125,12 @@ pipeline {
                         -var="public_subnets=${public_subnets}" \
                         -var="private_subnets=${private_subnets}" \
                         -var="environment_tag=${environment_tag}" \
-                        -var="vpc_tags${vpc_tags}" \
-                        -var="key_name${key_name}" \
-                        -var="instance_type${instance_type}" \
-                        -var="desired_capacity${desired_capacity}" \
-                        -var="min_size${min_size}" \
-                        -var="max_size${max_size}" \
+                        -var="vpc_tags=${vpc_tags}" \
+                        -var="key_name=${key_name}" \
+                        -var="instance_type=${instance_type}" \
+                        -var="desired_capacity=${desired_capacity}" \
+                        -var="min_size=${min_size}" \
+                        -var="max_size=${max_size}" \
                         -var="aws_alb_tgt_grp_att_port=${aws_alb_tgt_grp_att_port}" \
                         -var="aws_alb_target_group_port=${aws_alb_target_group_port}" \
                         -var="aws_alb_listener_port=${aws_alb_listener_port}"'
