@@ -1,7 +1,7 @@
 pipeline {
 
     agent any
-    parameters {
+    // parameters {
         
         // booleanParam(name: 'create_vpc', 
         //     defaultValue: true,
@@ -85,7 +85,7 @@ pipeline {
         // string(name: 'aws_alb_listener_port', 
         //     defaultValue: '80',
         //     description: 'Application Load Balancer Listener Port')
-    }
+    // }
     environment {
 
         AWS_DEFAULT_REGION = "${params.aws_region}"
