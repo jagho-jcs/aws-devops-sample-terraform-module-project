@@ -4,7 +4,7 @@ pipeline {
     parameters {
                 
         choice(name: 'aws_region', 
-            choices: ['eu-west-1', 'eu-west-2', 'us-east-1'], 
+            choices: ['eu-west-1', 'eu-west-2', 'eu-central-1', 'us-east-1'], 
             description: 'Where would you like to deploy your VPC?.. Examples eu-west-1, eu-west-2')
     }
     environment {
